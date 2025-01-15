@@ -19,7 +19,7 @@ public class BlogApiController {
     private final BlogService blogService;
 
     // HTTP 메서드가 POST 일 때 전달 받은 URL과 동일하면 지금 정의하는 메서드와 매핑
-    @PostMapping("/api/git a1gitarticles")
+    @PostMapping("/api/git articles")
     // @RequestBody로 요청 본문 값 매핑
     public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
         Article savedArticle = blogService.save(request);
