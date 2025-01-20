@@ -37,7 +37,7 @@ public class SpringBootDeveloperApplication {
                 5) 서버는 토큰이 유효한지 검증
                 6) 토큰이 유효하다면 클라이언트의 요청한 내용을 처리
 
-             토큰 기반 인증의 특징
+            토큰 기반 인증의 특징
                 1) 무상태성
                     사용자의 인증 정보가 담겨 있는 토큰이 서버가 아닌 클라이언트에 있으므로
                         서버에 저장할 필요 x
@@ -47,7 +47,7 @@ public class SpringBootDeveloperApplication {
                     그래서 완전한 무상태(stateless)로 효율적인 검증 가능
 
                 2) 확장성
-                    무상태성과 과나련하여, 서버를 확장할 때 상태 관리를 신경쓸 필요가 x
+                    무상태성과 관련하여, 서버를 확장할 때 상태 관리를 신경쓸 필요가 x
                     세션 기반 인증은 각각 API에서 인증을 해야하는 것과 달리 토큰 기반 인증은
                     토큰을 가지는 주체가 서버가 아닌 클라이언트이기 때문에 가지고 있는 하나의
                     토큰으로 결제 서버와 주문 서버에게 요청을 보내는 것이 가능.
@@ -61,25 +61,25 @@ public class SpringBootDeveloperApplication {
                     만약 토큰을 한 글자라도 변경하면 서버에서는 유효하지 않은 토큰이라고 판단합니다.
 
             JWT(JSON Web Token) -> json형태로 주고받는거죠
-               발급받은 JWT를 이용해 인증을 하려면 HTTP 요청 헤더 중에 Authorization 키 값에
-               Bearer + JWT 토큰 값을 넣어 보내야 합니다.
+                발급받은 JWT를 이용해 인증을 하려면 HTTP 요청 헤더 중에 Authorization 키 값에
+                Bearer + JWT 토큰 값을 넣어 보내야 합니다.
 
-               JWT 구조 : 온점(.)을 기준으로 헤더(header), 내용(payload), 서명(signature)로 이루어짐.
-                   aaaa . bbbb . cccc
-                   헤더    내용    서명
+                JWT 구조 : 온점(.)을 기준으로 헤더(header), 내용(payload), 서명(signature)로 이루어짐.
+                    aaaa . bbbb . cccc
+                    헤더    내용    서명
 
-                   1) 헤더에는 토큰의 타입와 해싱 알고리즘을 지정하는 정보를 포함함.
-                   ★토큰 타입과 해싱 알고리즘 지정 예시
+                    1) 헤더에는 토큰의 타입과 해싱 알고리즘을 지정하는 정보를 포함함.
+                    🎈 토큰 타입과 해싱 알고리즘 지정 예시
 
-                   {
-                        "typ": "JWT"
+                    {
+                        "typ": "JWT",
                         "alg": "HS256"
-                   }
+                    }
                         구성 :
                             typ : 토큰의 타입 지정 -> JWT "문자열"
                             alg : 해싱 알고리즘 지정
 
-                   2) 내용에는 토큰과 관련된 정보를 담습니다. 내용의 한 덩어리를 클레임(claim)
+                    2) 내용에는 토큰과 관련된 정보를 담습니다. 내용의 한 덩어리를 클레임(claim)
                         이라고 하며, 키-값의 한쌍으로 이루어짐.
                         등록된 클레임 / 공개 클레임 / 비공개 클레임으로 나뉨.
 
@@ -100,19 +100,19 @@ public class SpringBootDeveloperApplication {
                         비공개 클레임(private claim) : 공개되면 안되는 클레임.
                             클라이언트와 서버간의 통신에 사용
 
-                        ★ JWT 예시
+                        🎈 JWT 예시
                         {
                             "iss": "maybeags@gmail.com" // 등록된 클레임
                             "iat": 1622370678,
                             "exp": 1622372678,
-                            "https://ahngeunsu.com/jwt_claims/is_admin": true, // 공개 클레임
-                            "email": "maybeags@gmail.com", // 비공개 클레임
-                            "hello": "안녕하세요"
+                            "https://ahngeunsu.com/jwt_claims/is_admin": true,  // 공개 클레임
+                            "email": "maybeags@gmail.com",          // 비공개 클레임
+                            "hello": "안녕하세요😀"
                         }
 
                     iss, iat, exp는 JWT 자체에서 등록된 클레임
-                    URI로 네이밍된 "https://ahngeunsu.com/jwt_claims/is_admin" : 공개 클레임
-                    등록/ 공개 클레임 제외 나머지는 전부 비공개 클레임에 해당
+                    URI로 네이밍된 https://ahngeunsu.com/jwt_claims/is_admin : 공개클레임
+                    등록/공개 클레임 제외 나머지는 전부 비공개 클레임에 해당
 
                     3) 서명 : 해당 토큰이 조작되었거나 변경되지 않았음을 확인하는 용도로 사용.
                         헤더의 인코딩 값과 내용의 인코딩 값을 합친 후에 비밀키를 사용해 해시값을 생성
@@ -122,14 +122,14 @@ public class SpringBootDeveloperApplication {
                             토큰 유효 기간이 너무 짧다면 사용자가 불편함.
                                 -> 리프레시 토큰의 개념이 발생
                                 * 리프레시 토큰 : 액세스 토큰과 별개로 사용자를 인증하기 위한 용도가 아니라
-                                    액세스 토큰이 만료되었을 때 엑세스 토큰을 발급하기 위해 사용.
+                                    액세스 토큰이 만료되었을 때 액세스 토큰을 발급하기 위해 사용.
 
         2. JWT 서비스 구현
             의존성과 토큰 제공자를 추가하고 리프레시 토큰 도메인 토큰 필터를 구현하면
             -> JWT 서비스를 사용할 준비가 됐다고 볼 수 있습니다.
 
 
-            build.grade로 이동해서 의존성 추가할겁니다.
+            build.gradle로 이동해서 의존성 추가할겁니다
 
 
             토큰 제공자를 추가할겁니다.
@@ -140,4 +140,4 @@ public class SpringBootDeveloperApplication {
 
 
 
- */
+*/

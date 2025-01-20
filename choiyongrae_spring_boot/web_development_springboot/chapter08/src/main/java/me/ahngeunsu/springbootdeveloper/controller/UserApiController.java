@@ -38,12 +38,12 @@ public class UserApiController {
         new SecurityContextLogoutHandler().logout(request, response,
                 SecurityContextHolder.getContext().getAuthentication());
 
-        return  "redirect:/login";
+        return "redirect:/login";
     }
     /*
         /logout GET 요청을 하면 로그아웃을 담당하는 핸들러인 SecurityContextHandler의 logout()
         메서드를 호출해서 로그아웃합니다.
 
-        templates의 articleList.html로 이동.
+        templates의 articleList.html로 이동하겠습니다.
      */
 }

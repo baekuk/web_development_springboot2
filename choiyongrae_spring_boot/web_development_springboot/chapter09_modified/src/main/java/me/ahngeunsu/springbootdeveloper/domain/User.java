@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class User implements UserDetails {  // UserDetails를 상속 받아 인증 객체로 사용
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,41 +52,26 @@ public class User implements UserDetails {  // UserDetails를 상속 받아 인�
         return password;
     }
 
-    // 계정 만료 여부 반환
+
     @Override
     public boolean isAccountNonExpired() {
-        // 만료되었는지 확인하는 로직
-        return true;    //  true 만료되지 않았다는 의미 / NonExpired의 true
+        return true;
     }
 
-    // 계정 잠금 여부 반환
     @Override
     public boolean isAccountNonLocked() {
-        // 계정 잠금되었는지 확인하는 로직
-        return true;    // true -> 잠금되지 않음
+
+        return true;
     }
 
-    // 패스워드 만료 여부 반환
     @Override
     public boolean isCredentialsNonExpired() {
-        // 패스워드가 만료되었는지 확인하는 로직
-        return true; // true -> 만료되지 않았음
+        return true;
     }
 
-    // 계정 사용 가능 여부 반환
     @Override
     public boolean isEnabled() {
-        // 계정이 사용 가능한지 확인하는 로직
-        return true;    // true -> 사용 가능
+        return true;
     }
 }
-/*
 
-
-
-
-
-
-
-
- */
